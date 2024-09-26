@@ -3,9 +3,9 @@
 This is an independent research project that is being currently being worked on.
 The scope of this project is as follows:
 
--Oxidizers
-  -LOX
--Fuel
+-Oxidizers <br />
+  -LOX <br />
+-Fuel <br />
   -RP1, LH2, LCH4
 -Goals
   -Calculate the size of the CD nozzle for each F.O.
