@@ -4,7 +4,7 @@ This is an independent research project that is being currently being worked on.
 The scope of this project is as follows:
 
 -Oxidizers <br />
-..* LOX
+.. LOX
 -Fuel <br />
   -RP1, LH2, LCH4
 -Goals
