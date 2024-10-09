@@ -1,25 +1,41 @@
-from rocketcea.cea_obj import CEA_Obj
-from pylab import *
+from rocketcea.cea_obj_w_units import CEA_Obj
+import matplotlib.pyplot as plt
+import numpy as np
 
-pcL = [ 2000., 500., 70.]
+Pc = 0
+MR = 0
+PArr = []
+MRArr = []
+IPArr = []
+IMRArr = []
+figure, ax = plt.subplots()
+ax.grid()
 
-ispObj = CEA_Obj(propName='', oxName='LOX', fuelName="LH2")
+colorr = 'tab:red'
+ax.set_xlabel('Chamber Pressure [MPa]', color=colorr)
+ax.set_ylabel('Specific Impluse [m/s]')
+ax.tick_params(axis='x', labelcolor=colorr)
 
-for Pc in pcL:
-    cstarArr = []
-    MR = 2.0
-    mrArr = []
-    while MR < 8.0:
-        cstarArr.append( ispObj.get_Cstar( Pc=Pc, MR=MR) )
-        mrArr.append(MR)
-        MR += 0.05
-    plot(mrArr, cstarArr, label='Pc=%g psia'%Pc)
+ax2 = ax.twiny()
 
-legend(loc='best')
-grid(True)
-title( ispObj.desc )
-xlabel( 'Mixture Ratio' )
-ylabel( 'Cstar (ft/sec)' )
-savefig('cea_cstar_plot.png', dpi=120)
+colorb = 'tab:blue'
+ax2.set_xlabel('O/F Ratio', color=colorb)
+ax2.tick_params(axis='x', labelcolor=colorb)
 
-show()
+ispObj = CEA_Obj(oxName='LOX', fuelName="LH2", isp_units='m/s')
+
+while True:
+    MR += 0.01
+    Pc += 1/145
+    MRArr.append(MR)
+    PArr.append(Pc)
+    Ip = ispObj.get_Isp(Pc)
+    IM = ispObj.get_Isp(MR)
+    IPArr.append(Ip)
+    IMRArr.append(IM)
+    ax2.plot(MRArr, IMRArr, color=colorb)
+    ax.plot(PArr, IPArr, color=colorr)
+    if MR >= 15:
+        break
+
+plt.show()
