@@ -29,8 +29,8 @@ while True:
     Pc += 1/145
     MRArr.append(MR)
     PArr.append(Pc)
-    Ip = ispObj.get_Isp(Pc)
-    IM = ispObj.get_Isp(MR)
+    Ip = np.array(ispObj.get_Isp(Pc))
+    IM = np.array(ispObj.get_Isp(MR))
     IPArr.append(Ip)
     IMRArr.append(IM)
     ax2.plot(MRArr, IMRArr, color=colorb)
