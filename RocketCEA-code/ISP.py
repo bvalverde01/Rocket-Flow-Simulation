@@ -10,24 +10,24 @@ ax.set_title('Specific Impulse vs O/F Ratio at different Chamber Pressures')
 ax.grid()
 
 for P in [0.101325, 1, 2, 3, 4, 5, 6, 7 , 8, 9, 10]:
-    MR = 0 
+    MR = 1 
     MRArr = []
     IArr = []
     
      # Reset MR for each new value of P
     while MR <= 15:
         MRArr.append(MR)
-        I = IObj.get_Isp(P, MR)
+        I = IObj.get_Isp(Pc=P, MR=MR)
         IArr.append(I)
-        #print(MR, I)
         MR += 0.1
 
     max_I = max(IArr)
     max_I_index = IArr.index(max_I)
+    max_I = round(max_I, 2)
     corresponding_MR = MRArr[max_I_index]
+    corresponding_MR = round(corresponding_MR, 2)
     print(P, max_I, corresponding_MR)
     
-
     ax.plot(MRArr, IArr, label=f'{P} MPa')
 
 ax.legend()
