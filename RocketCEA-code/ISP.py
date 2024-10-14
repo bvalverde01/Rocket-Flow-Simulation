@@ -2,9 +2,61 @@ from rocketcea.cea_obj_w_units import CEA_Obj
 import matplotlib.pyplot as plt
 import numpy as np
 
-Pc = 0
-MR = 0
-PArr = []
+IObj = CEA_Obj(oxName='LOX', fuelName="LH2", pressure_units='MPa')
+figure, ax = plt.subplots()
+ax.set(ylabel='Specific Impulse [s]')
+ax.set(xlabel='O/F Ratio')
+ax.set_title('Specific Impulse vs O/F Ratio at different Chamber Pressures')
+ax.grid()
+
+for P in [0.101325, 1, 2, 3, 4, 5, 6, 7 , 8, 9, 10]:
+    MR = 0 
+    MRArr = []
+    IArr = []
+    
+     # Reset MR for each new value of P
+    while MR <= 15:
+        MRArr.append(MR)
+        I = IObj.get_Isp(P, MR)
+        IArr.append(I)
+        #print(MR, I)
+        MR += 0.1
+
+    max_I = max(IArr)
+    max_I_index = IArr.index(max_I)
+    corresponding_MR = MRArr[max_I_index]
+    print(P, max_I, corresponding_MR)
+    
+
+    ax.plot(MRArr, IArr, label=f'{P} MPa')
+
+ax.legend()
+
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''PArr = []
 MRArr = []
 IPArr = []
 IMRArr = []
@@ -38,4 +90,4 @@ while True:
     if MR >= 15:
         break
 
-plt.show()
+plt.show()'''
