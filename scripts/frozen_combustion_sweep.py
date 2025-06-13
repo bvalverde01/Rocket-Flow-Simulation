@@ -58,3 +58,6 @@ if __name__ == '__main__':
     # simple test
     data = sweep_loxlh2()
     print("Peak Isp:", data['Isp'].max(), "at O/F =", data['OF'][data['Isp'].argmax()])
+
+
+#trying to fix my shit
