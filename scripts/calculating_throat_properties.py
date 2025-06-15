@@ -2,7 +2,7 @@ from frozen_combustion_sweep import sweep_loxlh2
 import numpy as np
 import matplotlib.pyplot as plt
 
-data = sweep_loxlh2(phi_min=0.6, phi_max=5.0, n=200)
+data = sweep_loxlh2(phi_min=0.6, phi_max=5.0, n=400)
 phis  = data['phi']
 OFs   = data['OF']
 Isp  = data['Isp']
