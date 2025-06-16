@@ -86,7 +86,7 @@ for i, phi in enumerate(phis):
     for j, epsilon in enumerate(epsilons):
         Me_ij = solve_Me_from_eps(epsilon, gamma_i)
         Me[i,j] = Me_ij
-        Pe_ij= P0*(1 + ((gamma_i+1)/2)*(Me_ij)**2)**(-gamma_i/(gamma_i-1))
+        Pe_ij= P0*(1 + ((gamma_i-1)/2)*(Me_ij)**2)**(-gamma_i/(gamma_i-1))
         Pe[i,j] = Pe_ij
         Te_ij = T0_i/((P0/Pe_ij)**((gamma_i-1)/gamma_i))
         Te[i,j] = Te_ij
@@ -109,6 +109,7 @@ for i, phi in enumerate(phis):
 OFsto = gas.stoich_air_fuel_ratio('H2:2', 'O2:1')
 OFact = OFsto/phis
 
+print(Pe)
 # For each (i, j), compute linear fit R² of Isp[i,j,:] vs altitude
 from scipy.stats import linregress
 
@@ -130,7 +131,7 @@ for i in range(nphis):
 best_i, best_j = np.unravel_index(np.argmax(mean_Isp), mean_Isp.shape)
 
 
-print("\n==== Best Configuration Summary ====\n")
+'''print("\n==== Best Configuration Summary (with minus in equation) ====\n")
 print(f"Isp: {Isp[best_i, best_j, 0]:.10f} [s]")
 print(f"Ve: {ve[best_i, best_j]:.10f} [m/s]")
 print(f"Phi: {phis[best_i]}")
@@ -144,7 +145,7 @@ print(f"Mach Number at the exit: {Me[best_i, best_j]:.10f}")
 plt.plot(np.linspace(0, 84, natm), Isp[best_i, best_j, :])
 plt.xlabel("Altitude (km)")
 plt.ylabel("Specific Impulse (s)")
-plt.title("Isp Profile at Best Configuration")
+plt.title("Isp Profile at Best Configuration (with minus in equation)")
 plt.grid(True)
 plt.show()
 
@@ -153,4 +154,4 @@ plt.xlabel("Altitude (km)")
 plt.ylabel("Exit Area (m²)")
 plt.title("Altitude-Compensating Exit Area Profile")
 plt.grid(True)
-plt.show()
+plt.show()'''
